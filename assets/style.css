@@ -8,3 +8,14 @@ body {
   padding: 0;
   margin: 0;
 }
+
+.container-fluid {
+  position: absolute;
+  top: 50px;
+  left: 25px;
+  pointer-events: none;
+  padding: 15px;
+  background-color: rgba(255,255,255,0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+}

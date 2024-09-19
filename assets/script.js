@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import { OrbitControls } from 'jsm/controls/OrbitControls.js';
 import { MeshLine, MeshLineGeometry, MeshLineMaterial } from "./MeshLine/index.js";
 import { UnrealBloomPass } from 'jsm/postprocessing/UnrealBloomPass.js';
 import { EffectComposer } from 'jsm/postprocessing/EffectComposer.js';
@@ -7,16 +6,21 @@ import { RenderPass } from 'jsm/postprocessing/RenderPass.js';
 const w = window.innerWidth;
 const h = window.innerHeight;
 const scene = new THREE.Scene();
+// Add a light to the scene
 const camera = new THREE.PerspectiveCamera(55, w / h, 0.11, 1000);
-camera.position.set(2, 1, 5);
+
+// Set Camera position
+// Parameters are x = left and right, y = up and down, z = forward and backward
+camera.position.set(20, 10, 5);
+
+// Set camera rotation looking 5 degrees to the right
+camera.rotation.x = -40 * Math.PI / 180;
+camera.rotation.y = -25 * Math.PI / 180;
+camera.rotation.z = -30 * Math.PI / 180;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(w, h);
 document.body.appendChild(renderer.domElement);
-
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.03;
 
 // Declare amplitude and frequency variables
 const frequency = 0.1;
@@ -36,7 +40,6 @@ window.addEventListener('mousemove', (event) => {
   amplitude = ((((mouseY + 1) - windowHeight) / windowHeight) * 2) / 5;
   // update wavelength based on mouse x position
   waveLength = (((mouseX + 2) / windowWidth) * 0.1);
-  console.log(waveLength);
 });
 
 // bloom UnrealBloomPass
@@ -65,7 +68,7 @@ scene.add(linesGroup);
  */
 function getMeshLine(index) {
   const points = [];
-  const numPoints = 900;
+  const numPoints = 1200;
   for (let j = 0; j < numPoints; j += 1) {
     let x = -7.5 + j * 0.05;
     let y = Math.sin(j * 0.075);
@@ -97,15 +100,13 @@ function getMeshLine(index) {
   };
   return meshLine;
 }
-const numLines = 15;
+const numLines = 85;
 for (let i = 0; i < numLines; i += 1) {
   const line = getMeshLine(i);
   line.position.y = i * 0.1;
   line.position.z = i * -0.3;
   linesGroup.add(line);
 }
-
-camera.lookAt(scene.position);
 
 function animate(t = 0) {
   requestAnimationFrame(animate);

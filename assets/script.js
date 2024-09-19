@@ -114,7 +114,6 @@ function animate(t = 0) {
   camera.position.x = Math.sin(t * 0.001) * 1;
   linesGroup.userData.update(t * frequency);
   composer.render(scene, camera);
-  controls.update();
 }
 
 animate();

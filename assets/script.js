@@ -7,8 +7,9 @@ import { RenderPass } from 'jsm/postprocessing/RenderPass.js';
 const w = window.innerWidth;
 const h = window.innerHeight;
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
-camera.position.z = 5;
+const camera = new THREE.PerspectiveCamera(55, w / h, 0.11, 1000);
+camera.position.set(2, 1, 5);
+
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(w, h);
 document.body.appendChild(renderer.domElement);
@@ -27,19 +28,24 @@ window.addEventListener('mousemove', (event) => {
   const mouseY = event.clientY;
   const mouseX = event.clientX;
   const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight
+
+  // Get the mouses y position from the bottom of the window
+
   // Scale amplitude between 0 and 2
-  amplitude = ((mouseY * -1) / windowWidth) * 2;
+  amplitude = ((((mouseY + 1) - windowHeight) / windowHeight) * 2) / 5;
   // update wavelength based on mouse x position
-  waveLength = (mouseX / windowWidth) * 0.1;
+  waveLength = (((mouseX + 2) / windowWidth) * 0.1);
+  console.log(waveLength);
 });
 
 // bloom UnrealBloomPass
 // https://threejs.org/examples/webgl_postprocessing_unreal_bloom.html
 const renderScene = new RenderPass(scene, camera);
 const bloomPass = new UnrealBloomPass(new THREE.Vector2(w, h), 1.5, 0.4, 0.85);
-bloomPass.threshold = 0.5;
-bloomPass.strength = 2;
-bloomPass.radius = 1;
+bloomPass.threshold = 0.1;
+bloomPass.strength = 0.15;
+bloomPass.radius = 1.25;
 const composer = new EffectComposer(renderer);
 composer.addPass(renderScene);
 composer.addPass(bloomPass);
@@ -59,7 +65,7 @@ scene.add(linesGroup);
  */
 function getMeshLine(index) {
   const points = [];
-  const numPoints = 300;
+  const numPoints = 900;
   for (let j = 0; j < numPoints; j += 1) {
     let x = -7.5 + j * 0.05;
     let y = Math.sin(j * 0.075);
@@ -74,20 +80,20 @@ function getMeshLine(index) {
     color,
     map: texLoader.load("./assets/strokes/stroke.png"),
     useMap: true,
-    alphaTest: 0.5,
+    alphaTest: 0.1,
     transparent: true,
     resolution: new THREE.Vector2(w, h),
-    lineWidth: 0.5,
+    lineWidth: 0.75,
     blending: THREE.AdditiveBlending,
   });
 
   const meshLine = new MeshLine(geometry, material);
-  const offset = index * 10;
+  const offset = index * 50;
   meshLine.userData.update = function(t) {
     for (let p = 0, len = points.length; p < len; p += 3) {
       points[p + 1] = Math.sin((p - t + offset) * waveLength) * amplitude; // update y position only
     }
-    geometry.setPoints(points, (p) => 1);
+    geometry.setPoints(points, () => 1);
   };
   return meshLine;
 }
@@ -99,8 +105,12 @@ for (let i = 0; i < numLines; i += 1) {
   linesGroup.add(line);
 }
 
+camera.lookAt(scene.position);
+
 function animate(t = 0) {
   requestAnimationFrame(animate);
+  // Add a small amount of mvoement to the camera
+  camera.position.x = Math.sin(t * 0.001) * 1;
   linesGroup.userData.update(t * frequency);
   composer.render(scene, camera);
   controls.update();

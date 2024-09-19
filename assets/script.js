@@ -17,17 +17,32 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.03;
 
+// Declare amplitude and frequency variables
+const frequency = 0.1;
+let amplitude = 1;
+let waveLength = 0.1;
+
+// Event listener to update amplitude based on mouse x position
+window.addEventListener('mousemove', (event) => {
+  const mouseY = event.clientY;
+  const mouseX = event.clientX;
+  const windowWidth = window.innerWidth;
+  // Scale amplitude between 0 and 2
+  amplitude = ((mouseY * -1) / windowWidth) * 2;
+  // update wavelength based on mouse x position
+  waveLength = (mouseX / windowWidth) * 0.1;
+});
+
 // bloom UnrealBloomPass
 // https://threejs.org/examples/webgl_postprocessing_unreal_bloom.html
 const renderScene = new RenderPass(scene, camera);
 const bloomPass = new UnrealBloomPass(new THREE.Vector2(w, h), 1.5, 0.4, 0.85);
 bloomPass.threshold = 0.5;
-bloomPass.strength = 10;
+bloomPass.strength = 2;
 bloomPass.radius = 1;
 const composer = new EffectComposer(renderer);
 composer.addPass(renderScene);
 composer.addPass(bloomPass);
-
 
 const texLoader = new THREE.TextureLoader();
 
@@ -37,6 +52,11 @@ linesGroup.userData.update = function (t) {
 }
 scene.add(linesGroup);
 
+/**
+ * Creates a MeshLine with animated points.
+ * @param {number} index - The index of the line.
+ * @returns {MeshLine} - The created MeshLine.
+ */
 function getMeshLine(index) {
   const points = [];
   const numPoints = 300;
@@ -63,8 +83,6 @@ function getMeshLine(index) {
 
   const meshLine = new MeshLine(geometry, material);
   const offset = index * 10;
-  const amplitude = 1;
-  const waveLength = 0.015;
   meshLine.userData.update = function(t) {
     for (let p = 0, len = points.length; p < len; p += 3) {
       points[p + 1] = Math.sin((p - t + offset) * waveLength) * amplitude; // update y position only
@@ -83,7 +101,7 @@ for (let i = 0; i < numLines; i += 1) {
 
 function animate(t = 0) {
   requestAnimationFrame(animate);
-  linesGroup.userData.update(t * 0.1);
+  linesGroup.userData.update(t * frequency);
   composer.render(scene, camera);
   controls.update();
 }

@@ -18,12 +18,42 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.03;
 
-const textLoader = new THREE.FontLoader();
+const texLoader = new THREE.TextureLoader();
 const points = [];
 const numPoints = 300;
 for (let j =0; j < numPoints; j++) {
   let x = -7.5 + j * 0.05;
+  let y = Math.sin(j * 0.075);
   points.push(x, y, 0);
 }
 const geometry = new MeshLineGeometry();
 geometry.setPoints(points);
+
+const material = new MeshLineMaterial({
+  color: 0x0000ff,
+  map: texLoader.load("./assets/strokes/stroke.png"),
+  useMap: true,
+  alphaTest: 0.5,
+  transparent: true,
+  resolution: new THREE.Vector2(w, h),
+  lineWidth: 0.5,
+});
+
+const meshLine = new MeshLine(geometry, material);
+scene.add(meshLine);
+
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+animate();
+
+function handleResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+window.addEventListener("resize", handleResize, false);

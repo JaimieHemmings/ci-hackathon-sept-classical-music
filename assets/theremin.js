@@ -1,14 +1,12 @@
-
-const audioCtx = new AudioContext();
-const oscillator = audioCtx.createOscillator();
-let volume = audioCtx.createGain();
-oscillator.type = "square";
-oscillator.connect(volume);
-volume.connect(audioCtx.destination);
-volume.gain.value = 0;
-oscillator.start();
-
 window.addEventListener('mousedown', (e) => {
+    const audioCtx = new AudioContext();
+    const oscillator = audioCtx.createOscillator();
+    let volume = audioCtx.createGain();
+    oscillator.type = "square";
+    oscillator.connect(volume);
+    volume.connect(audioCtx.destination);
+    volume.gain.value = 0;
+    oscillator.start();
     volume.gain.value = e.clientY / 1000;
     oscillator.frequency.setValueAtTime(e.clientX, audioCtx.currentTime);
     

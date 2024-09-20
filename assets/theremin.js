@@ -16,20 +16,28 @@ window.addEventListener('mousedown', (e) => {
   oscillator.start();                   // Start the oscillator
   oscillator.type = "sine";             // Waveform type
 
-  // Function to set the frequency based on the mouse's x position
-  setFrequency = () => {
+  /**
+   * Function to set the frequency based on the mouse's x position
+   * @param {Event} e - The mouse event
+   * @returns {void}
+   */
+  setFrequency = (e) => {
     oscillator.frequency.setValueAtTime(e.clientX, audioCtx.currentTime);
   }
-  
-  // Function to set the volume based on the mouse's y position
-  setVolume = () => {
+
+  /**
+   * Function to set the volume based on the mouse's y position
+   * @param {Event} e - The mouse event
+   * @returns {void}
+   */
+  setVolume = (e) => {
     volume.gain.value = ((height - e.clientY) / height) * 2;
   }
     
   // Event listener for mouse move event to update frequency and volume
   window.addEventListener('mousemove', (e) => {     
-    volume.gain.value = ((height - e.clientY) / height) * 2;
-    oscillator.frequency.setValueAtTime(e.clientX, audioCtx.currentTime);  
+    setVolume(e);
+    setFrequency(e); 
   });
   
   // Event listener for mouse up event to stop the oscillator

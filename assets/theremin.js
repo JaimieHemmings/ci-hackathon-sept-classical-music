@@ -31,6 +31,10 @@ window.addEventListener('mousedown', (e) => {
    * @returns {void}
    */
   setVolume = (e) => {
+    /**
+     * Weird bit of math here as by default the mouse.y position is from the top of the window
+     * So we need to invert it to get the volume to be louder when the mouse is at the top of the * window
+     */
     volume.gain.value = ((height - e.clientY) / height) * 2;
   }
     

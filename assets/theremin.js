@@ -16,10 +16,10 @@ window.addEventListener('mousedown', (e) => {
         console.log(e.clientY / 1000);
         volume.gain.value = e.clientY / 1000;
         oscillator.frequency.setValueAtTime(e.clientX, audioCtx.currentTime);
-
+        
     });
-
+    
     window.addEventListener('mouseup', () => {
-      volume.gain.value = 0;
+      oscillator.stop();
     })
 })

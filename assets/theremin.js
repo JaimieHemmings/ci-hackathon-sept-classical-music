@@ -29,7 +29,6 @@ window.addEventListener('mousedown', (e) => {
   // Event listener for mouse move event to update frequency and volume
   window.addEventListener('mousemove', (e) => {     
     volume.gain.value = ((height - e.clientY) / height) * 2;
-    console.log(volume.gain.value);
     oscillator.frequency.setValueAtTime(e.clientX, audioCtx.currentTime);  
   });
   

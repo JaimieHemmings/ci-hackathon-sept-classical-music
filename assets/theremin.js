@@ -1,5 +1,8 @@
 // Get the height of the window to calculate volume based on mouse position
 let height = window.innerHeight;
+let width = window.innerWidth;
+
+let freqMax = 2000;
 
 // Event listener for mouse down event to start the audio context and oscillator
 window.addEventListener('mousedown', (e) => {
@@ -12,7 +15,6 @@ window.addEventListener('mousedown', (e) => {
   
   volume.connect(audioCtx.destination); // Connect the oscillator to the gain node
   oscillator.connect(volume);           // Connect the gain node to the audio context's
-  oscillator.frequency.value = 440;     // Set the initial frequency
   oscillator.start();                   // Start the oscillator
   oscillator.type = "sine";             // Waveform type
 
@@ -22,7 +24,11 @@ window.addEventListener('mousedown', (e) => {
    * @returns {void}
    */
   setFrequency = (e) => {
-    oscillator.frequency.setValueAtTime(e.clientX, audioCtx.currentTime);
+
+    // calculate Frequency based on mouse.x as a percentage of window width
+    let freq = (freqMax / 100) * ((e.clientX / width) * 100);
+    console.log(freq);
+    oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
   }
 
   /**
@@ -48,4 +54,10 @@ window.addEventListener('mousedown', (e) => {
   window.addEventListener('mouseup', () => {
     oscillator.stop();
   });
+});
+
+// update height and width on window resize
+window.addEventListener('resize', () => {
+  height = window.innerHeight;
+  width = window.innerWidth;
 });

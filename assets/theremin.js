@@ -1,28 +1,40 @@
+// Get the height of the window to calculate volume based on mouse position
+let height = window.innerHeight;
 
-const audioCtx = new AudioContext();
-const oscillator = audioCtx.createOscillator();
-height = window.innerHeight;
-let volume = audioCtx.createGain();
-oscillator.type = "square";
-oscillator.connect(volume);
-volume.connect(audioCtx.destination);
-oscillator.frequency.value = 440;
-volume.gain.value = 0;
-oscillator.start();
-
+// Event listener for mouse down event to start the audio context and oscillator
 window.addEventListener('mousedown', (e) => {
-    oscillator.frequency.setValueAtTime(e.clientX, audioCtx.currentTime);
-})
-    
-window.addEventListener('mousemove', (e) => { 
-  // get mouse distance from bottom of window
+  // Create a new audio context
+  const audioCtx = new AudioContext();
+  // Create an oscillator node to generate sound
+  const oscillator = audioCtx.createOscillator();
+  // Create a gain node to control the volume
+  let volume = audioCtx.createGain();
   
-  volume.gain.value = ((height - e.clientY) / height) * 2;
-  console.log(volume.gain.value);
+  volume.connect(audioCtx.destination); // Connect the oscillator to the gain node
+  oscillator.connect(volume);           // Connect the gain node to the audio context's
+  oscillator.frequency.value = 440;     // Set the initial frequency
+  oscillator.start();                   // Start the oscillator
+  oscillator.type = "sine";             // Waveform type
+
+  // Function to set the frequency based on the mouse's x position
+  setFrequency = () => {
     oscillator.frequency.setValueAtTime(e.clientX, audioCtx.currentTime);
-
-});
-
-window.addEventListener('mouseup', () => {
-  volume.gain.value = 0;
+  }
+  
+  // Function to set the volume based on the mouse's y position
+  setVolume = () => {
+    volume.gain.value = ((height - e.clientY) / height) * 2;
+  }
+    
+  // Event listener for mouse move event to update frequency and volume
+  window.addEventListener('mousemove', (e) => {     
+    volume.gain.value = ((height - e.clientY) / height) * 2;
+    console.log(volume.gain.value);
+    oscillator.frequency.setValueAtTime(e.clientX, audioCtx.currentTime);  
+  });
+  
+  // Event listener for mouse up event to stop the oscillator
+  window.addEventListener('mouseup', () => {
+    oscillator.stop();
+  });
 });

@@ -9,6 +9,16 @@ const scene = new THREE.Scene();
 // Add a light to the scene
 const camera = new THREE.PerspectiveCamera(50, w / h, 0.11, 1000);
 
+let mouseDown = false;
+
+window.addEventListener('mousedown', (e) => {
+  mouseDown = true;
+});
+
+window.addEventListener('mouseup', (e) => {
+  mouseDown = false;
+});
+
 // Set Camera position
 // Parameters are x = left and right, y = up and down, z = forward and backward
 camera.position.set(0, 10, 3);
@@ -94,8 +104,11 @@ function getMeshLine(index) {
   const offset = index * 200;
   meshLine.userData.update = function(t) {
     for (let p = 0, len = points.length; p < len; p += 3) {
-      // slightly randomise the amplite and wavelength
-      points[p + 1] = Math.sin((p - t + offset * 2) * waveLength ) * (amplitude / 2);
+      if (mouseDown) {
+        points[p + 1] = Math.sin((p - t + offset * 2) * waveLength ) * (amplitude / 2);
+      } else {
+        points[p + 1] = 0;
+      }
     }
     geometry.setPoints(points, () => 1);
   };

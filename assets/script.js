@@ -51,8 +51,17 @@ let waveLength = 0.1;
 
 
 function moveEvent (e) {
-  const mouseY = e.clientY;
-  const mouseX = e.clientX;
+  let mouseY;
+  let mouseX;
+
+  if(e.type == 'touchmove'){
+    mouseY = e.touches[0].clientY;
+    mouseX = e.touches[0].clientX;
+  }
+  else if(e.type == 'mousemove'){
+    mouseY = e.clientY;
+    mouseX = e.clientX;
+  }
 
   // Get the mouses y position from the bottom of the window
 
@@ -147,6 +156,7 @@ function animate(t = 0) {
   // add a small rotation to the camera
   camera.rotation.z = Math.sin(t * 0.001) * 0.1;
   camera.position.x = Math.sin(t * 0.001) * 0.1;
+  
   linesGroup.userData.update(t * frequency);
   composer.render(scene, camera);
 }

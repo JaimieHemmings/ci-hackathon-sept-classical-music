@@ -57,6 +57,12 @@ A theremin is a very simple to use yet difficult to master intrument. By simply 
 
 - [Josh's CSS Reset](https://www.joshwcomeau.com/css/custom-css-reset/) - A simple but effective CSS reset
 
+- [Devil Breeze](https://www.cdnfonts.com/devil-breeze.font) - Custom font from CDNFonts
+
+- [MixButton](https://mixbutton.com/mixing-articles/music-note-to-frequency-chart/) - Used to help us understand the specific frequencies for individual notes
+
+- [W3Schools](https://www.w3schools.com/jsref/event_touchstart.asp) - Amazing resource for understanding and using touch events to make the website compatible with touch screen devices
+
 
 ### Acknowledgements
 

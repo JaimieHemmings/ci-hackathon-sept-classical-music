@@ -38,7 +38,6 @@ camera.position.set(0, 10, 3);
 // Set camera rotation looking 5 degrees to the right
 camera.rotation.x = -50 * Math.PI / 180;
 camera.rotation.y = -25 * Math.PI / 180;
-camera.rotation.z = Math.PI / 180;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(w, h);

@@ -11,11 +11,23 @@ const camera = new THREE.PerspectiveCamera(50, w / h, 0.11, 1000);
 
 let mouseDown = false;
 
+// Event listener to check for mouse down
 window.addEventListener('mousedown', (e) => {
   mouseDown = true;
 });
 
+// Event listener to check for mouse up
 window.addEventListener('mouseup', (e) => {
+  mouseDown = false;
+});
+
+// Event listener to check for touch start
+window.addEventListener('touchstart', (e) => {
+  mouseDown = true;
+});
+
+// Event listener to check for touch end
+window.addEventListener('touchend', (e) => {
   mouseDown = false;
 });
 
@@ -37,19 +49,27 @@ const frequency = 0.1;
 let amplitude = 1;
 let waveLength = 0.1;
 
-// Event listener to update amplitude based on mouse x position
-window.addEventListener('mousemove', (event) => {
-  const mouseY = event.clientY;
-  const mouseX = event.clientX;
-  const windowWidth = window.innerWidth;
-  const windowHeight = window.innerHeight
+
+function moveEvent (e) {
+  const mouseY = e.clientY;
+  const mouseX = e.clientX;
 
   // Get the mouses y position from the bottom of the window
 
   // Scale amplitude between 0 and 2
-  amplitude = ((((mouseY + 1) - windowHeight) / windowHeight) * 2) / 5;
+  amplitude = ((((mouseY + 1) - h) / w) * 2) / 5;
   // update wavelength based on mouse x position
-  waveLength = ((mouseX / windowWidth) * 0.1) / 2;
+  waveLength = ((mouseX / w) * 0.1) / 2;
+}
+
+// Event listener to update amplitude based on mouse x position
+window.addEventListener('mousemove', (e) => {
+  moveEvent(e);
+});
+
+// Event listener for touch move event to update frequency and volume
+window.addEventListener('touchmove', (e) => {
+  moveEvent(e);
 });
 
 // bloom UnrealBloomPass

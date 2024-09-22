@@ -62,6 +62,7 @@ startPlaying = (e) => {
       const [clientX, clientY] = getCoords(e)
       // calculate Frequency based on mouse.x as a percentage of window width
       let freq = ((freqRange / 100) * ((clientX / width) * 100)) + freqMin;
+      freq < freqMin ? freq = freqMin : freq > freqMax ? freq = freqMax : freq;
       oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
     }
   

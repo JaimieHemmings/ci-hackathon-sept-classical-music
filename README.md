@@ -1,11 +1,14 @@
 # Code Institute September Hackathon
 
+![Screenshot of website](assets/amiresponsivescreenshot.png)
+
 ## Table Of Contents
 
 - [The Hackathon](#the-hackathon)
 - [Our Team](#our-team)
 - [Our Project](#our-project)
 - [Instructions](#instructions)
+- [Deployment and Local Developement](#deployment-and-local-developement)
 - [Credits](#credits)
 
 ## The Hackathon
@@ -47,6 +50,39 @@ Additionally, it allowed us to be creative in developing visuals to go along sid
 
 A theremin is a very simple to use yet difficult to master intrument. By simply clicking anywhere on the screen the user will create a note relative to the cursor position. The pitch and volume of the note is dependent on the x and y position values of the cursor at any given time. Simply move the cursor up to increase volume and down to decrease volume, similarly, to increase pitch the user can simply move their cursor to the right of the screen and left to decrease pitch, resulting in a bassier tone.
 
+## Deployment and Local Developement
+
+### Deployment
+
+We used GitHub pages for the deployment of this website
+
+- Log in to GitHub (If you don't have an account you will need to register)
+- Navigate to the [Repository](https://github.com/Alvor1991/Hackathon-Team1)
+- Click "Settings"
+- Find "Pages" in the left side vertical navigation menu
+- Scroll down to the "Source" section
+- Under "Select Branch" choose Main
+- Select "Root" from the Select Folder Menu
+- Click save, wait a few moments and the site will be deployed to GitHub pages
+
+### Local Development
+
+#### Forking
+
+- Login to GitHub (Create an account if you do not have one)
+- Navigate to the [Repository](https://github.com/Alvor1991/Hackathon-Team1)
+- Click "Fork" at the top right
+
+#### Cloning
+
+- Login to GitHub (Create an account if you do not have one)
+- Navigate to the [Repository](https://github.com/Alvor1991/Hackathon-Team1)
+- Select Code from the top right
+- Copy the link provided for your chosen cloning method (HTTPS, SSH, GitHub CLI)
+- Navigate to s directory on your local environment where you want the project cloned
+- Open a terminal in this directory
+- Type ```Git Clone <Repo URL>``` and press enter
+
 ## Credits
 
 ### Resources
@@ -62,6 +98,8 @@ A theremin is a very simple to use yet difficult to master intrument. By simply 
 - [MixButton](https://mixbutton.com/mixing-articles/music-note-to-frequency-chart/) - Used to help us understand the specific frequencies for individual notes
 
 - [W3Schools](https://www.w3schools.com/jsref/event_touchstart.asp) - Amazing resource for understanding and using touch events to make the website compatible with touch screen devices
+
+- [GitHub](https://github.com/) - For version Control and hosting
 
 
 ### Acknowledgements

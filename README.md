@@ -53,9 +53,13 @@ A theremin is a very simple to use yet difficult to master intrument. By simply 
 
 - [Three JS](https://threejs.org/) - Three JS is a fantastic lightweight JavaScript library enabling the use of 3d objects and shaders within the browser
 
+- [MeshLine](https://github.com/spite/THREE.MeshLine) - A library for building triangle billboarded lines using Three JS. It is a replacement for Three JSs THREE.Line.
+
 - [MDN Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) - The MDN documentation of the web audio API was an invaluable resource for learning what was available and possible as well as in the implementation and use of the web audio API
 
 - [Josh's CSS Reset](https://www.joshwcomeau.com/css/custom-css-reset/) - A simple but effective CSS reset
+
+- [Hover effect on mobile](https://stackoverflow.com/questions/35634226/javascript-detect-finger-moved-over-a-div) The solution to how to make the hover effect work on mobile was adapted from the answer in this stackoverflow question.
 
 
 ### Acknowledgements

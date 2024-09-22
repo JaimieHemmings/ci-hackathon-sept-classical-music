@@ -12,6 +12,7 @@
 - [User Stories](#user-stories)
 - [Instructions](#instructions)
 - [Deployment and Local Developement](#deployment-and-local-developement)
+- [Known Bugs](#known-bugs)
 - [Credits](#credits)
 
 ## The Hackathon
@@ -136,6 +137,12 @@ We used GitHub pages for the deployment of this website
 - Navigate to s directory on your local environment where you want the project cloned
 - Open a terminal in this directory
 - Type ```Git Clone <Repo URL>``` and press enter
+
+## Known Bugs
+
+- When the user resizes the window the hover highlight of the different note sections remains offset until the window is refreshed
+
+- One test user reported that occasionally the click event would stop causing sound to be played until the window was refreshed. We were unable to replicate the issue and the user had no console log errors
 
 ## Credits
 

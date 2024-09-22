@@ -1,5 +1,7 @@
 # Code Institute September Hackathon
 
+[Link to Live Site](https://alvor1991.github.io/Hackathon-Team1/)
+
 ## Table Of Contents
 
 - [The Hackathon](#the-hackathon)

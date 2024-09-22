@@ -5,9 +5,11 @@ let width = window.innerWidth;
 let freqMin = 261;                  // Minimum frequency for the oscillator
 let freqMax = 494;                  // Maximum frequency for the oscillator
 let freqRange = freqMax - freqMin;  // Range of frequencies
+let mouseDown = false;
 
 // Event listener for mouse down event to start the audio context and oscillator
 window.addEventListener('mousedown', (e) => {
+  mouseDown = true;
   startPlaying(e);
 });
 
@@ -76,9 +78,12 @@ startPlaying = (e) => {
     }
       
     // Event listener for mouse move event to update frequency and volume
-    window.addEventListener('mousemove', (e) => {     
-      setVolume(e);
-      setFrequency(e); 
+    window.addEventListener('mousemove', (e) => {
+      if (mouseDown == true) {
+        setVolume(e);
+        setFrequency(e);
+      };
+       
     });
   
     // Move event handler for mobile devices
@@ -89,12 +94,13 @@ startPlaying = (e) => {
     
     // Event listener for mouse up event to stop the oscillator
     window.addEventListener('mouseup', () => {
-      oscillator.stop();
+      mouseDown = false;
+      volume.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1.0);
     });
   
     // Touch event handler for movile devices
     window.addEventListener('touchend', () => {
-      oscillator.stop();
+      volume.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1.0);
     });
 }
 

@@ -62,6 +62,7 @@ startPlaying = (e) => {
       const [clientX, clientY] = getCoords(e)
       // calculate Frequency based on mouse.x as a percentage of window width
       let freq = ((freqRange / 100) * ((clientX / width) * 100)) + freqMin;
+      freq < freqMin ? freq = freqMin : freq > freqMax ? freq = freqMax : freq;
       oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
     }
   
@@ -73,7 +74,8 @@ startPlaying = (e) => {
     setVolume = (e) => {
       /**
        * Weird bit of math here as by default the mouse.y position is from the top of the window
-       * So we need to invert it to get the volume to be louder when the mouse is at the top of the * window
+       * So we need to invert it to get the volume to be louder when the mouse is at the top of the 
+       * window
        */
       const [clientX, clientY] = getCoords(e)
       volume.gain.value = ((height - clientY) / height) * 2;
@@ -95,9 +97,9 @@ startPlaying = (e) => {
     });
 
     function fadeOut() {
-      let stopTime = audioCtx.currentTime + 0.001;
+      let stopTime = audioCtx.currentTime + 0.5;
       // Fade out the volume
-      volume.gain.exponentialRampToValueAtTime(0.001, stopTime);
+      volume.gain.setTargetAtTime(0, stopTime - 0.25, 0.01);
       // End the oscillator after the stopTime
       oscillator.stop(stopTime);
     }
@@ -105,11 +107,12 @@ startPlaying = (e) => {
     // Event listener for mouse up event to stop the oscillator
     window.addEventListener('mouseup', () => {
       mouseDown = false;
-      volume.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1.0);    });
+      fadeOut();
+    });
   
     // Touch event handler for movile devices
     window.addEventListener('touchend', () => {
-      volume.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1.0);
+      fadeOut();
     });
 }
 

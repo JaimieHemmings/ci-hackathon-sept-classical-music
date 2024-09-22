@@ -91,12 +91,19 @@ startPlaying = (e) => {
       setVolume(e);
       setFrequency(e);
     });
+
+    function fadeOut() {
+      let stopTime = audioCtx.currentTime + 0.001;
+      // Fade out the volume
+      volume.gain.exponentialRampToValueAtTime(0.001, stopTime);
+      // End the oscillator after the stopTime
+      oscillator.stop(stopTime);
+    }
     
     // Event listener for mouse up event to stop the oscillator
     window.addEventListener('mouseup', () => {
       mouseDown = false;
-      volume.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1.0);
-    });
+      volume.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1.0);    });
   
     // Touch event handler for movile devices
     window.addEventListener('touchend', () => {

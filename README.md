@@ -12,6 +12,7 @@
 - [User Stories](#user-stories)
 - [Instructions](#instructions)
 - [Deployment and Local Developement](#deployment-and-local-developement)
+- [Testing](#testing)
 - [Known Bugs](#known-bugs)
 - [Credits](#credits)
 
@@ -137,6 +138,18 @@ We used GitHub pages for the deployment of this website
 - Navigate to s directory on your local environment where you want the project cloned
 - Open a terminal in this directory
 - Type ```Git Clone <Repo URL>``` and press enter
+
+## Testing
+
+| # | Feature                                                                                                  | Pass Or Fail |
+|---|----------------------------------------------------------------------------------------------------------|--------------|
+| 1 | Website should display appropriately at all screen sizes                                                 | Pass         |
+| 2 | A mousedown event should generate volume and pitch dependent on cursor xy coordinates                    | Pass         |
+| 3 | A mouseup event should stop all noise after a short delay to fadeout the volume                          | Pass         |
+| 4 | A mousemove event should shift the pitch and volume appropriately dependent on the cursor xy coordinates | Pass         |
+| 5 | A touchstart event should generate volume and pitch dependent on touch event xy coordinates              | Pass         |
+| 6 | A touchstop event should shift volume and pitch dependent on the touchmove event xy coordinates          | Pass         |
+| 7 | A touchstop event should stop the noise after a short delay to fadeout the colume                        | Pass         |
 
 ## Known Bugs
 

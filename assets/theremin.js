@@ -22,10 +22,12 @@ getCoords = (e) => {
   if(e.type == 'touchmove' || e.type == 'touchstart'){
     clientY = e.touches[0].clientY;
     clientX = e.touches[0].clientX;
+    console.log(clientX)
   }
-  else if(e.type == 'mousemove'){
+  else if(e.type == 'mousemove' || e.type == 'mousedown'){
     clientY = e.clientY;
     clientX = e.clientX;
+    console.log(clientX)
   }
 
   return [clientX, clientY]

@@ -18,6 +18,19 @@ window.addEventListener('touchstart', (e) => {
   startPlaying(e);
 });
 
+getCoords = (e) => {
+  if(e.type == 'touchmove' || e.type == 'touchstart'){
+    clientY = e.touches[0].clientY;
+    clientX = e.touches[0].clientX;
+  }
+  else if(e.type == 'mousemove'){
+    clientY = e.clientY;
+    clientX = e.clientX;
+  }
+
+  return [clientX, clientY]
+}
+
 startPlaying = (e) => {
     // Create a new audio context
     const audioCtx = new AudioContext();
@@ -25,10 +38,13 @@ startPlaying = (e) => {
     const oscillator = audioCtx.createOscillator();
     // Create a gain node to control the volume
     let volume = audioCtx.createGain();
+
+    const [clientX, clientY] = getCoords(e)
     
+    console.log(((freqRange / 100) * ((clientX / width) * 100)) + freqMin);
     // Set the initial frequency of the oscillator
     oscillator.frequency.setValueAtTime(
-      (((freqRange / 100) * ((e.clientX / width) * 100)) + freqMin), audioCtx.currentTime); 
+      (((freqRange / 100) * ((clientX / width) * 100)) + freqMin), audioCtx.currentTime); 
     
     volume.connect(audioCtx.destination); // Connect the oscillator to the gain node
     oscillator.connect(volume);           // Connect the gain node to the audio context's
@@ -41,8 +57,9 @@ startPlaying = (e) => {
      * @returns {void}
      */
     setFrequency = (e) => {
+      const [clientX, clientY] = getCoords(e)
       // calculate Frequency based on mouse.x as a percentage of window width
-      let freq = ((freqRange / 100) * ((e.clientX / width) * 100)) + freqMin;
+      let freq = ((freqRange / 100) * ((clientX / width) * 100)) + freqMin;
       oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
     }
   
@@ -56,8 +73,8 @@ startPlaying = (e) => {
        * Weird bit of math here as by default the mouse.y position is from the top of the window
        * So we need to invert it to get the volume to be louder when the mouse is at the top of the * window
        */
-      volume.gain.value = ((height - e.clientY) / height) * 2;
-      console.log(volume.gain.value)
+      const [clientX, clientY] = getCoords(e)
+      volume.gain.value = ((height - clientY) / height) * 2;
     }
       
     // Event listener for mouse move event to update frequency and volume

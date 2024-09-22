@@ -105,5 +105,3 @@ We used GitHub pages for the deployment of this website
 ### Acknowledgements
 
 A big thank you to the Code Instute team and the volunteers that make the Code Institute Hackathon events possible every year
-
-

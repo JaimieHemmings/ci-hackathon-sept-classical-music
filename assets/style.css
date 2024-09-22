@@ -2,7 +2,51 @@
   Minified CSS reset provided by https://www.joshwcomeau.com/css/custom-css-reset/
 */
 
-*,::after,::before{box-sizing:border-box}*{margin:0}body{line-height:1.5;-webkit-font-smoothing:antialiased}canvas,img,picture,svg,video{display:block;max-width:100%}button,input,select,textarea{font:inherit}h1,h2,h3,h4,h5,h6,p{overflow-wrap:break-word}#__next,#root{isolation:isolate}
+*,
+::after,
+::before {
+  box-sizing: border-box
+}
+
+* {
+  margin: 0
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased
+}
+
+canvas,
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  overflow-wrap: break-word
+}
+
+#__next,
+#root {
+  isolation: isolate
+}
 
 body {
   padding: 0;
@@ -17,7 +61,7 @@ body {
   left: 25px;
   pointer-events: none;
   padding: 15px;
-  background-color: rgba(255,255,255,0.4);
+  background-color: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);
   border-radius: 30px;
 }
@@ -43,19 +87,25 @@ body {
     flex-direction: column;
     justify-content: end;
     padding: 5px;
-    border: 1px solid rgba(255,255,255,0.4);
-    background: rgba(255,255,255,0);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0);
     flex-grow: 1;
     flex-basis: 0;
-
-    &:hover {
-      background: rgba(255,255,255,0.4);
-      backdrop-filter: blur(10px);
-    }
 
     p {
       pointer-events: none;
       user-select: none;
     }
   }
+}
+
+.wrapper:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+
+#highlight {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
 }

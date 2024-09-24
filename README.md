@@ -4,7 +4,7 @@ This is a fork of the [original repo](https://github.com/Alvor1991/Hackathon-Tea
 
 ![Screenshot of website](assets/amiresponsivescreenshot.png)
 
-[Link to Live Site](https://alvor1991.github.io/Hackathon-Team1/)
+[Link to Live Site](https://jaimiehemmings.github.io/ci-hackathon-sept-classical-music/)
 
 ## Table Of Contents
 

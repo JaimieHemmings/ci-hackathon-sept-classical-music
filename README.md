@@ -1,5 +1,7 @@
 # Code Institute September Hackathon
 
+This is a fork of the [original repo](https://github.com/Alvor1991/Hackathon-Team1) in order to preserve it in the state it was in at submission in case of further edits or deletion.
+
 ![Screenshot of website](assets/amiresponsivescreenshot.png)
 
 [Link to Live Site](https://alvor1991.github.io/Hackathon-Team1/)
